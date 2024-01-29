@@ -51,7 +51,9 @@ async function createUser(req, res, next) {
 	try {
 		// verify client input
 		const { username, email, password } = req.body
-
+		if (!username || !email || !password) {
+			return res.status(400).json({ success: false, message: 'Missing credentials.' })
+		}
 		// user already exists
 		const existingUser = await User.findOne({ email: email }).exec()
 		if (existingUser) {
