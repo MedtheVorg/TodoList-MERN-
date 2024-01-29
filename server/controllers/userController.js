@@ -1,6 +1,8 @@
 import mongoose from 'mongoose'
-import { User } from '../models/userModel'
+import { User } from '../models/userModel.js'
 import { compare } from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import { PRIVATE_KEY } from '../keys/index.js'
 
 async function loginUser(req, res, next) {
 	try {
@@ -26,7 +28,20 @@ async function loginUser(req, res, next) {
 			return res.status(401).json({ success: false, message: 'Invalid credentials.' })
 		}
 
-		return res.status(200).json({ success: true, user: user })
+		// generate JWT
+		const token = jwt.sign(
+			{
+				username: user.username,
+				email: user.email,
+				tasks: user.tasks,
+				createdAt: user.createdAt,
+				updatedAt: user.updatedAt,
+			},
+			PRIVATE_KEY,
+			{ algorithm: 'RS256', expiresIn: '1d' },
+		)
+
+		return res.status(200).json({ success: true, user: user, token: `Bearer ${token}` })
 	} catch (error) {
 		// call the errorHandler middleware
 		next({ message: 'internal server error', statusCode: 500 })
