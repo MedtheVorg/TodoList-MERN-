@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose'
-import { genSaltSync, hashSync } from 'bcrypt'
+import { genSalt, hash } from 'bcrypt'
 
 const userSchema = new Schema({
 	username: String,
@@ -9,20 +9,19 @@ const userSchema = new Schema({
 	comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 })
 
-const User = model('User', userSchema)
-
 //user hooks
-userSchema.pre('save', function hashPassword(next) {
-	// if the password was
+userSchema.pre('save', async function hashPassword(next) {
+	// if the password was modified or is new
 	if (this.isModified('password') || this.isNew) {
 		// generate salt rounds
-		const salt = genSaltSync(12)
+		const salt = await genSalt(12)
 		// hash the password
-		const hashedPassword = hashSync(this.password, salt)
+		const hashedPassword = await hash(this.password, salt)
 		this.password = hashedPassword
 	}
 	// call the next middleware
 	next()
 })
+const User = model('User', userSchema)
 
 export { User }
