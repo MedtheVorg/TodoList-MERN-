@@ -62,7 +62,8 @@ async function createUser(req, res, next) {
 		}
 
 		// create a new user
-		const newUser = (await User.create({ username: username, email: email, password: password })).save({
+		const newUser = new User({ username: username, email: email, password: password })
+		await newUser.save({
 			timestamps: true,
 		})
 
