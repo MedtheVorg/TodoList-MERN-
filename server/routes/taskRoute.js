@@ -7,7 +7,7 @@ import {
 	readAllTasks,
 	readTask,
 	updateTask,
-} from '../controllers/taskControler'
+} from '../controllers/taskController.js'
 
 const router = express.Router()
 
