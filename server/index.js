@@ -3,8 +3,8 @@ loadLocalVariables()
 import process from 'process'
 import express from 'express'
 import connectToMongoDB from './utils/mongoDb.js'
-import { taskRouter } from './routes/taskRoute.js'
 import morgan from 'morgan'
+import { mainRouter } from './routes/index.js'
 
 const app = express()
 
@@ -33,7 +33,7 @@ function startServer(dataBaseName) {
 	})
 
 	//routes
-	app.use('/api', taskRouter)
+	app.use(mainRouter)
 
 	//
 	// server listener
