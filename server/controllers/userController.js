@@ -75,11 +75,18 @@ async function updateUser(req, res, next) {
 	try {
 		//verify client input
 		const { userID } = req.params
-		if (!userID || mongoose.isValidObjectId(userID)) {
-			throw new Error({ message: 'invalid user ID', statusCode: 400 })
+		if (!userID || !mongoose.Types.ObjectId.isValid(userID)) {
+			return res.status(400).json({ success: false, message: 'invalid user ID.' })
 		}
+		const { username, password } = req.body
+		if (!username && !password) {
+			return res
+				.status(400)
+				.json({ success: false, message: 'At least one of username or password is required.' })
+		}
+
 		//fetch user from dataBase and Update
-		const user = await User.findByIdAndUpdate({ _id: userID }, req.body).exec()
+		const user = await User.findByIdAndUpdate({ _id: userID }, req.body, { new: true }).exec()
 
 		// user does not exist
 		if (!user) {
@@ -96,7 +103,7 @@ async function deleteUser(req, res, next) {
 	try {
 		//verify client input
 		const { userID } = req.params
-		if (!userID || mongoose.isValidObjectId(userID)) {
+		if (!userID || !mongoose.isValidObjectId(userID)) {
 			throw new Error({ message: 'invalid user ID', statusCode: 400 })
 		}
 		//fetch user from dataBase and Delete
