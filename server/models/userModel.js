@@ -22,6 +22,20 @@ userSchema.pre('save', async function hashPassword(next) {
 	// call the next middleware
 	next()
 })
+
+userSchema.pre('findOneAndUpdate', async function reHashPassword(next) {
+	// if the password was modified
+	if (this._update && this._update.password) {
+		// generate salt rounds
+		const salt = await genSalt(12)
+		// hash the password
+		const hashedPassword = await hash(this._update.password, salt)
+		this._update.password = hashedPassword
+	}
+	// call the next middleware
+	next()
+})
+
 const User = model('User', userSchema)
 
 export { User }
