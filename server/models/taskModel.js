@@ -1,20 +1,25 @@
 import { Schema, model } from 'mongoose'
 
-const taskSchema = new Schema({
-	title: String,
-	description: String,
-	Priority: {
-		type: String,
-		enum: ['Critical, Urgent, Normal, Low'],
-		default: 'Normal',
+const taskSchema = new Schema(
+	{
+		title: String,
+		description: String,
+		priority: {
+			type: String,
+			enum: ['critical, urgent, normal, low'],
+			default: 'Normal',
+		},
+		status: {
+			type: String,
+			enum: ['canceled,in progress,completed'],
+			default: 'in progress',
+		},
+		deadline: Date,
 	},
-	status: {
-		type: String,
-		enum: ['canceled,in progress,completed'],
+	{
+		timestamps: true,
 	},
-	deadline: Date,
-	createdAt: Date,
-})
+)
 
 const Task = model('Task', taskSchema)
 
