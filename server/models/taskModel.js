@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose'
+import mongoose, { Schema, model } from 'mongoose'
 
 const taskSchema = new Schema(
 	{
@@ -14,6 +14,7 @@ const taskSchema = new Schema(
 			enum: ['canceled,in progress,completed'],
 			default: 'in progress',
 		},
+		comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
 		deadline: Date,
 	},
 	{
