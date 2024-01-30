@@ -14,6 +14,7 @@ const taskSchema = new Schema(
 			enum: ['canceled,in progress,completed'],
 			default: 'in progress',
 		},
+		comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
 		deadline: Date,
 		comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
 	},
