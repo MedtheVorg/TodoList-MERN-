@@ -1,7 +1,12 @@
+import Navbar from './containers/Navbar'
+
 function App() {
 	return (
 		<>
-			<div className="h-screen w-screen bg-[#222] text-white">hello world</div>
+			<header>
+				<Navbar />
+			</header>
+			<main></main>
 		</>
 	)
 }
