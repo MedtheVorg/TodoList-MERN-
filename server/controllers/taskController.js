@@ -41,6 +41,7 @@ async function readTask(req, res, next) {
 }
 
 async function createTask(req, res, next) {
+	req.user.id
 	try {
 		// verify client input
 		const { title, description, priority, status, deadline } = req.body
@@ -119,11 +120,11 @@ async function deleteTask(req, res, next) {
 
 		// delete all task's comments
 		if (taskToDelete.comments && taskToDelete.comments.length > 0) {
-			await Comment.deleteMany({ _id: { $in: taskToDelete.comments } }).exec()
+			await Comment.deleteMany({ _id: { $in: taskToDelete.comments } })
 		}
 
 		// delete the document
-		await taskToDelete.deleteOne().exec()
+		await taskToDelete.deleteOne()
 
 		// task deleted successfully
 		res.status(200).json({ success: true, message: 'Task deleted.' })
