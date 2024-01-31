@@ -12,10 +12,10 @@ async function authenticateWithJWT(req, res, next) {
 		const bearerToken = req.headers.authorization.split(' ')[1]
 
 		// verify token
-		const isValid = jwt.verify(bearerToken, PUBLIC_KEY)
-
-		if (isValid) {
+		const decodedJwt = jwt.verify(bearerToken, PUBLIC_KEY)
+		if (decodedJwt) {
 			//call next middleware
+			req.user = decodedJwt
 			next()
 		}
 	} catch (error) {
