@@ -1,9 +1,6 @@
-import { Comment } from '../models/commentModel'
-import mongoose, { ObjectId } from 'mongoose'
-import { User } from '../models/userModel'
-import { text } from 'express'
-
-User.findById()
+import { Comment } from '../models/commentModel.js'
+import mongoose from 'mongoose'
+import { User } from '../models/userModel.js'
 
 async function createComment(req, res, next) {
 	try {
@@ -34,10 +31,10 @@ async function createComment(req, res, next) {
 		await user.save()
 
 		// Respond with the created comment
+
 		res.status(201).json({ success: true, createdComment: newComment })
 	} catch (error) {
 		// Handle errors
-		console.error('Error creating comment:', error)
 		next(error)
 	}
 }

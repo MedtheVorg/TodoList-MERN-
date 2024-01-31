@@ -1,5 +1,5 @@
 import express from 'express'
-import { createTask, deleteTask, readAllTasks, readTask, updateTask } from '../controllers/taskController.js'
+import { createTask, deleteTask, readAllTasks, readTask, updateTask } from '../controllers/task.Controller.js'
 import { authenticateWithJWT } from '../middlewares/authenticateWithJWT.js'
 
 const router = express.Router()
