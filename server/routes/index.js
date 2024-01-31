@@ -1,7 +1,7 @@
 import express from 'express'
-import { taskRouter } from './taskRoute.js'
-import { userRouter } from './userRoutes.js'
 import { commentRoute } from './comment.routes.js'
+import { taskRouter } from './task.Routes.js'
+import { userRouter } from './user.Routes.js'
 
 const router = express.Router()
 
