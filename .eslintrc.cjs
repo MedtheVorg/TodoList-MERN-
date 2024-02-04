@@ -1,6 +1,6 @@
 module.exports = {
 	root: true,
-	env: { browser: true, es2020: true, node: true },
+	env: { browser: true, es2020: true, node: true, 'jest/globals': true },
 	extends: [
 		'eslint:recommended',
 		'plugin:react/recommended',
@@ -14,5 +14,6 @@ module.exports = {
 	rules: {
 		'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
 		'no-unused-vars': ['warn', { vars: 'all', args: 'after-used', ignoreRestSiblings: false }],
+		'react/prop-types': 0,
 	},
 }

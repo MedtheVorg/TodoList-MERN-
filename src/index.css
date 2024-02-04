@@ -1,3 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap');
 @tailwind base;
+
+@layer base {
+	html,
+	body {
+		@apply text-neutral-800 h-full;
+	}
+	html.dark {
+		@apply text-neutral-50;
+		@apply bg-neutral-800;
+	}
+}
+
+#root {
+	height: 100%;
+}
 @tailwind components;
 @tailwind utilities;

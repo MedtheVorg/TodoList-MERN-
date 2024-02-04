@@ -6,16 +6,17 @@ const taskSchema = new Schema(
 		description: String,
 		priority: {
 			type: String,
-			enum: ['critical, urgent, normal, low'],
+			enum: ['critical', 'urgent', 'normal', 'low'],
 			default: 'Normal',
 		},
 		status: {
 			type: String,
-			enum: ['canceled,in progress,completed'],
+			enum: ['canceled', 'in progress', 'completed'],
 			default: 'in progress',
 		},
 		comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
 		deadline: Date,
+		author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 	},
 	{
 		timestamps: true,

@@ -1,12 +1,14 @@
 import { config as loadLocalVariables } from 'dotenv'
 loadLocalVariables()
 import process from 'process'
-import express from 'express'
 import connectToMongoDB from './utils/mongoDb.js'
 import morgan from 'morgan'
 import { mainRouter } from './routes/index.js'
+import express from 'express'
+import cors from 'cors'
+import { errorHandler } from './middlewares/errorHandler.js'
 
-const app = express()
+export const app = express()
 
 initializeServer()
 
@@ -24,6 +26,7 @@ async function initializeServer() {
 
 function startServer(dataBaseName) {
 	// middlewares
+	app.use(cors({ origin: '*' }))
 	app.use(express.json())
 	app.use(morgan('dev'))
 
@@ -35,7 +38,8 @@ function startServer(dataBaseName) {
 	//routes
 	app.use(mainRouter)
 
-	//
+	//error handler
+	app.use(errorHandler)
 	// server listener
 	app.listen(process.env.PORT, () => {
 		console.log(`connected successfully to ${dataBaseName} database.`)
