@@ -1,15 +1,18 @@
 import { twMerge } from 'tailwind-merge'
 
-const Button = ({ text, className }) => {
+const Button = ({ value, className, onClick, isDisabled, type = 'button' }) => {
 	return (
 		<button
-			type="button"
+			type={type}
 			className={twMerge(
-				'inline-block rounded bg-blue-600  px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white  ',
+				'w-full py-3 mt-10 bg-gray-800 rounded-sm font-medium text-white uppercase focus:outline-none hover:bg-gray-700 hover:shadow-none',
 				className,
+				isDisabled && 'bg-gray-300 hover:bg-gray-300',
 			)}
+			onClick={onClick}
+			disabled={isDisabled}
 		>
-			{text}
+			{value}
 		</button>
 	)
 }
