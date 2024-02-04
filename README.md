@@ -5,6 +5,15 @@
 
 Tasko is full stack web app that provides the ability to create,read,update and delete tasks. each user can manage their own tasks as well as add comments to other tasks created by other users.
 
+# Thought Process
+
+even though design is not one of my strong points I wanted to include this one here to show case what I did before diving into creating the layout using react and tailwindcss.
+
+<img src="./src/assets/toughtprocess.png" />
+<br/>
+<br/>
+<br/>
+  
 # Screenshots
 
 <details open>
@@ -26,6 +35,9 @@ Tasko is full stack web app that provides the ability to create,read,update and 
   <summary>Register Page</summary>
     <img src="./src/assets/registerPage.png" />
 </details>
+
+<br/>
+<br/>
 
 # Technologies
 
