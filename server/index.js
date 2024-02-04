@@ -6,6 +6,7 @@ import morgan from 'morgan'
 import { mainRouter } from './routes/index.js'
 import express from 'express'
 import cors from 'cors'
+import { errorHandler } from './middlewares/errorHandler.js'
 
 export const app = express()
 
@@ -37,7 +38,8 @@ function startServer(dataBaseName) {
 	//routes
 	app.use(mainRouter)
 
-	//
+	//error handler
+	app.use(errorHandler)
 	// server listener
 	app.listen(process.env.PORT, () => {
 		console.log(`connected successfully to ${dataBaseName} database.`)
