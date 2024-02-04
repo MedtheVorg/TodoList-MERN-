@@ -4,7 +4,7 @@ import { authenticateWithJWT } from '../middlewares/authenticateWithJWT.js'
 
 const router = express.Router()
 
-router.get('/tasks', authenticateWithJWT, readAllTasks)
+router.get('/tasks', readAllTasks)
 router.get('/tasks/:taskID', readTask)
 router.post('/tasks', authenticateWithJWT, createTask)
 router.patch('/tasks/:taskID', authenticateWithJWT, updateTask)
