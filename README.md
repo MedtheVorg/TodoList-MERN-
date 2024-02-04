@@ -103,6 +103,20 @@ $ npm test
 
 <br/>
 
+## Contributors
+
+<table width="100%"><tr align="left">
+
+  <td align="center"><a href="https://github.com/Mehdi-012"><img src="https://avatars.githubusercontent.com/Mehdi-012" width="120px;"alt="Mehdi-012"/><br/><sub><b>Mehdi-012
+ </b></sub></a></td>
+  <td align="center"><a href="https://github.com/MedtheVorg"><img src="https://avatars.githubusercontent.com/MedtheVorg" width="120px;"alt="mohamed lemaallaoui"/><br/><sub><b>Mohamed Lem
+</b></sub></a></td>
+</tr>
+</table>
+
+<br />
+<br />
+
 # Contributing
 
 If you'd like to contribute code, documentation, or other enhancements, please follow these general steps:
