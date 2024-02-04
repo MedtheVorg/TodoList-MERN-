@@ -17,13 +17,14 @@ const Menu = () => {
 						setIsMenuOpen((prev) => !prev)
 					}}
 				>
-					<RxHamburgerMenu size={40} />
+					<RxHamburgerMenu size={40} color="#1f2937" />
 				</button>
 				{isMenuOpen && (
 					<MenuList
 						className={
-							'absolute top-[100%]  right-0 flex bg-gray-100 flex-col gap-y-6 w-fit transition-all '
+							'absolute top-[100%] z-50  right-0 flex bg-gray-100 flex-col gap-y-6 w-full transition-all '
 						}
+						setIsMenuOpen={setIsMenuOpen}
 					/>
 				)}
 			</div>
