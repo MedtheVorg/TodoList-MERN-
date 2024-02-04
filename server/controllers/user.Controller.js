@@ -46,7 +46,7 @@ async function loginUser(req, res, next) {
 		return res.status(200).json({ success: true, user: user, token: `Bearer ${token}` })
 	} catch (error) {
 		// call the errorHandler middleware
-		next({ message: 'internal server error', statusCode: 500 })
+		next({ message: 'internal server error', statusCode: 500, error: error.message })
 	}
 }
 async function readUser(req, res, next) {
@@ -157,4 +157,8 @@ async function deleteUser(req, res, next) {
 	}
 }
 
-export { loginUser, readUser, createUser, updateUser, deleteUser }
+async function logWithJwt(req, res) {
+	res.status(200).json({ user: req.user })
+}
+
+export { loginUser, readUser, createUser, updateUser, deleteUser, logWithJwt }

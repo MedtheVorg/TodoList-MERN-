@@ -1,25 +1,26 @@
 import { Comment } from '../models/commentModel.js'
 import mongoose from 'mongoose'
 import { User } from '../models/userModel.js'
+import { Task } from '../models/taskModel.js'
 
 async function createComment(req, res, next) {
 	try {
 		// Extract necessary data from the request
-		const { task, text } = req.body
+		const { taskID, text } = req.body
 
 		// Validate if required data is present
-		if (!text || !task) {
+		if (!text || !taskID) {
 			return res.status(400).json({ error: 'Missing required fields' })
 		}
 
-		if (!isObjectId(task)) {
-			return res.status(400).json({ error: 'Task must be an objectID' })
+		if (!isObjectId(taskID)) {
+			return res.status(400).json({ error: 'TaskID must be an objectID' })
 		}
 
 		// Create a new comment
 		const newComment = new Comment({
 			text,
-			task: toObjectId(task),
+			task: toObjectId(taskID),
 			author: toObjectId(req.user.id),
 		})
 
@@ -29,6 +30,9 @@ async function createComment(req, res, next) {
 		user.comments.push(toObjectId(newComment.id))
 
 		await user.save()
+		const task = await Task.findById(taskID).exec()
+		task.comments.push(toObjectId(newComment.id))
+		await task.save()
 
 		// Respond with the created comment
 
