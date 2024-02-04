@@ -10,52 +10,60 @@ async function createTask(title, description, priority, status, deadline) {
 	}
 
 	try {
-		const response = await api.post('/tasks', taskData)
-		console.log('Task created successfully:', response.data)
+		const response = await api.post('/tasks', taskData, {
+			headers: {
+				Authorization: localStorage.getItem('token'),
+			},
+		})
 		return response.data
 	} catch (error) {
-		console.error('Error creating task:', error)
-		throw error
+		return error
 	}
 }
 
-async function getAlltasks() {
+async function getAllTasks() {
 	try {
 		const response = await api.get('/tasks')
 		return response.data
 	} catch (error) {
 		console.error('Error reading task:', error)
-		throw error
 	}
 }
 
-export async function getTaskById(taskId) {
+async function getTaskById(taskId) {
 	try {
 		const response = await api.get(`/tasks/${taskId}`)
-		return response.data
+		return response
 	} catch (error) {
-		console.error('Error reading by ID task:', error)
-		throw error
+		return error
 	}
 }
 
-export async function updateTask(payloadUpdate, id) {
+async function updateTask(payloadUpdate, id) {
 	try {
-		const response = await api.patch(`/tasks/${id}`, payloadUpdate)
+		const response = await api.patch(`/tasks/${id}`, payloadUpdate, {
+			headers: {
+				Authorization: localStorage.getItem('token'),
+			},
+		})
 		return response.data
 	} catch (error) {
-		console.error('Error updating task:', error)
-		throw error
+		return error
 	}
 }
 
-export async function deleteTask(taskId) {
+async function deleteTask(taskId) {
 	try {
-		const response = await api.delete(`/tasks/${taskId}`)
+		const response = await api.delete(`/tasks/${taskId}`, {
+			headers: {
+				Authorization: localStorage.getItem('token'),
+			},
+		})
 		return response.data
 	} catch (error) {
 		console.error('Error delete')
-
-		throw error
+		console.error(error)
 	}
 }
+
+export { createTask, getAllTasks, getTaskById, updateTask, deleteTask }

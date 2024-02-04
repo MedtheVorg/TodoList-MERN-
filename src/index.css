@@ -2,8 +2,9 @@
 @tailwind base;
 
 @layer base {
-	html {
-		@apply text-neutral-800;
+	html,
+	body {
+		@apply text-neutral-800 h-full;
 	}
 	html.dark {
 		@apply text-neutral-50;
@@ -11,5 +12,8 @@
 	}
 }
 
+#root {
+	height: 100%;
+}
 @tailwind components;
 @tailwind utilities;

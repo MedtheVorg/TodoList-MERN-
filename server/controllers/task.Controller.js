@@ -6,7 +6,10 @@ import { User } from '../models/userModel.js'
 async function readAllTasks(req, res, next) {
 	try {
 		// fetch tasks from dataBase
-		const tasks = await Task.find().exec()
+		const tasks = await Task.find()
+			.populate('author', '-password')
+			.populate({ path: 'comments', populate: { path: 'author', select: '-password' } })
+			.exec()
 
 		// return a successful response
 		res.status(200).json({ tasksCount: tasks.length, tasks: tasks })
@@ -41,12 +44,11 @@ async function readTask(req, res, next) {
 }
 
 async function createTask(req, res, next) {
-	req.user.id
 	try {
 		// verify client input
 		const { title, description, priority, status, deadline } = req.body
 		if (!title || !description || !priority || !status || !deadline) {
-			return res.status(400).json({ success: false, message: 'Required fields are Missing' })
+			return res.status(400).json({ success: false, message: 'Required fields are Missing', bd: req.body })
 		}
 
 		// create new task
@@ -67,7 +69,7 @@ async function createTask(req, res, next) {
 		author.tasks.push(new mongoose.Types.ObjectId(task.id))
 		await author.save()
 
-		res.status(201).json({ success: true, task: task, authorName: author.username })
+		res.status(201).json({ success: true, task: task, authorName: author.username, taskID: task._id })
 	} catch (error) {
 		// call the errorHandler middleware
 		console.log(error.message)

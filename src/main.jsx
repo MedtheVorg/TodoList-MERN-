@@ -2,12 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import { StoreProvider } from './hooks/useStore.js'
-
+import { StoreProvider } from './hooks/useStore.jsx'
+import { BrowserRouter as Router } from 'react-router-dom'
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
 		<StoreProvider>
-			<App />
+			<Router>
+				<App />
+			</Router>
 		</StoreProvider>
 	</React.StrictMode>,
 )
