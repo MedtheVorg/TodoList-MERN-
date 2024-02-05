@@ -7,7 +7,7 @@ Tasko is full stack web app that provides the ability to create,read,update and 
 
 # Thought Process
 
-even though design is not one of my strong points I wanted to include this one here to show case what I did before diving into creating the layout using react and tailwindcss.
+even though design is not one of my strongest points I wanted to include this one here to showcase what I did before diving into creating the layout using react and tailwindcss.
 
 <img src="./src/assets/toughtprocess.png" />
 <br/>
@@ -66,8 +66,8 @@ And many more ..., You can refer to [package.json](./package.json) file for more
 
 -   Register/ login : create your own account to manage tasks.
 -   create, read, update and delete : you can add your own tasks modify them and delete them as you see fit.
--   Search : search for a specific task by title or filter
--   Filtering : tasks list by title , status, priority or deadline.
+-   Search : search for a specific task by title.
+-   Filtering : filter tasks list by title , status, priority or deadline.
 -   JWT routes protection : a user can view , edit and delete his own tasks but can only view other users tasks.
 
 <br/>
