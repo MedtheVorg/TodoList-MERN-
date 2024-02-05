@@ -16,7 +16,7 @@ export const StoreProvider = ({ children }) => {
 		description: '',
 		priority: '',
 		status: '',
-		deadLine: '',
+		deadline: '',
 	})
 	const [searchTerm, setSearchTerm] = useState('')
 	const [orderBy, setOrderBy] = useState('deadline')
