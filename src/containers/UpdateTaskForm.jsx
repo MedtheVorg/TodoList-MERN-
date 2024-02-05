@@ -22,6 +22,7 @@ const UpdateTaskForm = () => {
 			setIsLoading(true)
 			event.preventDefault()
 
+			console.log('task : ', updatedTask)
 			const response = await updateTask(updatedTask, taskID)
 			if (response instanceof Error) {
 				toast.error(response.message)
@@ -52,7 +53,7 @@ const UpdateTaskForm = () => {
 					description: response.data.task.description,
 					priority: response.data.task.priority,
 					status: response.data.task.status,
-					deadLine: response.data.task.deadline.split('T')[0],
+					deadline: response.data.task.deadline.split('T')[0],
 				})
 			}
 		}
@@ -124,7 +125,7 @@ const UpdateTaskForm = () => {
 						onChange={(event) =>
 							setUpdatedTask((prev) => ({ ...prev, [event.target.name]: event.target.value }))
 						}
-						name={'deadLine'}
+						name={'deadline'}
 					/>
 					<div className="flex justify-between gap-x-8">
 						<Button type="submit" value={isLoading ? <Spinner /> : 'Save'} isDisabled={isLoading} />

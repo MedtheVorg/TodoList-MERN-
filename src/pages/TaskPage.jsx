@@ -24,7 +24,7 @@ const TaskPage = () => {
 	}, [])
 	return (
 		<motion.div
-			className="absolute bg-black/20 top-0 left-0 bottom-0 right-0 h-full flex items-center justify-center"
+			className="absolute bg-black/20 top-0 left-0 bottom-0 right-0 h-full flex items-center justify-center overlay"
 			initial={{
 				opacity: 0,
 				y: 10,
@@ -38,6 +38,9 @@ const TaskPage = () => {
 				y: 10,
 			}}
 			transition={{ type: 'spring', stiffness: 100 }}
+			onClick={(event) => {
+				event.target.classList.contains('overlay') && navigate('/')
+			}}
 		>
 			<div className="bg-white w-[80%] h-[80%]  p-6 grid  gap-y-4 overflow-auto rounded-md ">
 				{/* task details */}
